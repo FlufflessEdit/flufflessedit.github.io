@@ -17,6 +17,7 @@ function setView() {
     });
   }
   setInkXform();
+  if (typeof setInkXform === "function") setInkXform();
 }
 
 /* any stray scroll of the hidden viewport is reset instantly — the
@@ -42,6 +43,8 @@ function applyView() {
   plane.style.transform = `translate(${VP.x}px, ${VP.y}px) scale(${VP.z})`;
   mediaplane.style.transform = plane.style.transform;
   if (cur.pg) cur.pg.view = { x: Math.round(VP.x), y: Math.round(VP.y), z: VP.z };
+  if (typeof redrawInk === "function") redrawInk();
+  if (typeof positionCovers === "function") positionCovers();
   redrawInk();
   positionCovers();
 
@@ -103,17 +106,8 @@ function sizeCanvas() {
   }
   inkC.style.width = vpW + "px";
   inkC.style.height = vpH + "px";
-  redrawInk();
+  if (typeof redrawInk === "function") redrawInk();
 }
-if (window.ResizeObserver)
-  new ResizeObserver(() => {
-    sizeCanvas();
-    setView();
-  }).observe(viewport);
-addEventListener("resize", () => {
-  sizeCanvas();
-  setView();
-});
 function centerViewOn(node) {
   const r = node.getBoundingClientRect(),
     v = viewport.getBoundingClientRect();
