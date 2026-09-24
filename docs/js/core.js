@@ -135,7 +135,7 @@ let VP = { x: DEFVIEW.x, y: DEFVIEW.y, z: 1 },
   dprNow = 1;
 let viewPend = false;
 
-const APP_VERSION = "1.7.1"; /* keep in sync with tauri.conf.json */
+const APP_VERSION = "1.7.5"; /* keep in sync with tauri.conf.json */
 
 /* ================= global undo =================
    Every mutating gesture pushes {undo, redo}. Ctrl+Z / the undo button
